@@ -1,14 +1,16 @@
 const express = require('express');
 const bodyParser = require("body-parser") // frontendten gelen body'yi parçalamak için gerekli, bak sonradan
+var cors = require('cors');
 
 
 
 
-const port = 3000;
+const port = 8000;
 const app = express();
 
 
 app.use(bodyParser.json())
+app.use(cors());
 
 
 
@@ -20,7 +22,7 @@ app.listen(port, () => {
 
 
 // Veri saklamak için basit bir dizi
-let products = [{ id: 1, name: "Apple", categoryId: 1 }]
+let products = [{ id: 1, name: "Apple", categoryId: 1 } , { id: 2, name: "Banana", categoryId: 2 }]
 
 // Veri ekleme
 app.post('/products', (req, res) => {
