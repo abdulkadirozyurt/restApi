@@ -12,6 +12,10 @@ export default function Product() {
         getProducts();
     }, [])
 
+    const getObject = () => {
+        return {id:parseInt(id),name:name,categoryId:parseInt(categoryId)}
+    }
+
     const getProducts = async () => {
         const url = baseUrl + "products";
         const data = await axios.get(url).then(res => res.data);
@@ -23,6 +27,12 @@ export default function Product() {
         await axios.post(url,product).then(res => res.data);
     }
 
+    const updateProduct = async (product) => {
+        const url = `${baseUrl}products/${product.id}`;
+        const data = await axios.put(url,product).then(res => res.data);
+        console.log(data)
+    }
+    
 
     return (
         <div>
@@ -44,8 +54,8 @@ export default function Product() {
                 </div>
             </div>
             <div className="buttonList">
-                <div onClick={()=>addProduct({id:id,name:name,categoryId:categoryId})} className="button">Ekle</div>
-                <div className="button">Güncelle</div>
+                <div onClick={()=>addProduct(getObject())} className="button">Ekle</div>
+                <div onClick={()=>updateProduct(getObject())} className="button">Güncelle</div>
                 <div className="button">Sil</div>
                 <div onClick={getProducts} className="button">Getir</div>
             </div>
