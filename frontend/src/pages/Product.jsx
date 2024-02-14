@@ -3,6 +3,9 @@ import axios from "axios";
 
 export default function Product() {
     const [products, setProducts] = useState([]);
+    const [id, setId] = useState("");
+    const [name, setName] = useState("");
+    const [categoryId, setCategoryId] = useState("");
     const baseUrl = "http://localhost:8000/";
 
     useEffect(() => {
@@ -15,6 +18,11 @@ export default function Product() {
         setProducts(data);
     }
 
+    const addProduct = async (product) => {
+        const url = baseUrl + "products";
+        await axios.post(url,product).then(res => res.data);
+    }
+
 
     return (
         <div>
@@ -23,20 +31,20 @@ export default function Product() {
                 <div className="width-10 ">
                     <div className="inputs">
                         <div className="label">Id:</div>
-                        <input type="text" id="fname" name="fname" />
+                        <input onInput={e=>setId(e.target.value)} type="text" id="id" name="id" />
                     </div>
                     <div className="inputs">
                         <div className="label">name:</div>
-                        <input type="text" id="fname" name="fname" />
+                        <input onInput={e=>setName(e.target.value)} type="text" id="name" name="name" />
                     </div>
                     <div className="inputs">
                         <div className="label">categoryId:</div>
-                        <input type="text" id="fname" name="fname" />
+                        <input onInput={e=>setCategoryId(e.target.value)} type="text" id="categoryId" name="categoryId" />
                     </div>
                 </div>
             </div>
             <div className="buttonList">
-                <div className="button">Ekle</div>
+                <div onClick={()=>addProduct({id:id,name:name,categoryId:categoryId})} className="button">Ekle</div>
                 <div className="button">Güncelle</div>
                 <div className="button">Sil</div>
                 <div onClick={getProducts} className="button">Getir</div>
