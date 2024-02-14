@@ -13,7 +13,7 @@ export default function Product() {
     }, [])
 
     const getObject = () => {
-        return {id:parseInt(id),name:name,categoryId:parseInt(categoryId)}
+        return { id: parseInt(id), name: name, categoryId: parseInt(categoryId) }
     }
 
     const getProducts = async () => {
@@ -24,15 +24,15 @@ export default function Product() {
 
     const addProduct = async (product) => {
         const url = baseUrl + "products";
-        await axios.post(url,product).then(res => res.data);
+        await axios.post(url, product).then(res => res.data);
     }
 
     const updateProduct = async (product) => {
         const url = `${baseUrl}products/${product.id}`;
-        const data = await axios.put(url,product).then(res => res.data);
+        const data = await axios.put(url, product).then(res => res.data);
     }
 
-    const deleteProduct = async(productId) => {
+    const deleteProduct = async (productId) => {
         const url = `${baseUrl}products/${productId}`;
         const data = await axios.delete(url).then(res => res.data);
         alert(data.message);
@@ -45,22 +45,22 @@ export default function Product() {
                 <div className="width-10 ">
                     <div className="inputs">
                         <div className="label">Id:</div>
-                        <input onInput={e=>setId(e.target.value)} type="text" id="id" name="id" />
+                        <input onInput={e => setId(e.target.value)} type="text" id="id" name="id" />
                     </div>
                     <div className="inputs">
                         <div className="label">name:</div>
-                        <input onInput={e=>setName(e.target.value)} type="text" id="name" name="name" />
+                        <input onInput={e => setName(e.target.value)} type="text" id="name" name="name" />
                     </div>
                     <div className="inputs">
                         <div className="label">categoryId:</div>
-                        <input onInput={e=>setCategoryId(e.target.value)} type="text" id="categoryId" name="categoryId" />
+                        <input onInput={e => setCategoryId(e.target.value)} type="text" id="categoryId" name="categoryId" />
                     </div>
                 </div>
             </div>
             <div className="buttonList">
-                <div onClick={()=>addProduct(getObject())} className="button">Ekle</div>
-                <div onClick={()=>updateProduct(getObject())} className="button">Güncelle</div>
-                <div onClick={()=>deleteProduct(id)} className="button">Sil</div>
+                <div onClick={() => addProduct(getObject())} className="button">Ekle</div>
+                <div onClick={() => updateProduct(getObject())} className="button">Güncelle</div>
+                <div onClick={() => deleteProduct(id)} className="button">Sil</div>
                 <div onClick={getProducts} className="button">Getir</div>
             </div>
             <h2>Products</h2>
@@ -68,8 +68,8 @@ export default function Product() {
                 return (
                     <div key={index}>
                         <div>id:{product.id}</div>
-                        <div>id:{product.name}</div>
-                        <div>id:{product.categoryId}</div>
+                        <div>name:{product.name}</div>
+                        <div>categoryId:{product.categoryId}</div>
                         <div>---</div>
                     </div>
                 );
